@@ -41,13 +41,36 @@ async def lifespan(app: FastAPI):
     # Configuration initiale de la base de données
     await setup_default_data(app.state.db)
     
+    # Démarrer la tâche de nettoyage des événements de long polling
+    cleanup_task = asyncio.create_task(periodic_cleanup())
+    app.state.cleanup_task = cleanup_task
+    
     print(f"✅ Instance fédérée prête sur {settings.INSTANCE_DOMAIN}")
+    print("✅ Long polling activé avec nettoyage automatique")
     
     yield
     
     # Shutdown
     print("🛑 Arrêt de Revolt Backend")
+    app.state.cleanup_task.cancel()
+    try:
+        await app.state.cleanup_task
+    except asyncio.CancelledError:
+        pass
     app.state.db_client.close()
+
+async def periodic_cleanup():
+    """Tâche de nettoyage périodique des anciens événements"""
+    while True:
+        try:
+            await asyncio.sleep(3600)  # Attendre 1 heure
+            await long_polling_manager.cleanup_old_events(max_age_hours=24)
+            print("🧹 Nettoyage automatique des événements de long polling effectué")
+        except asyncio.CancelledError:
+            break
+        except Exception as e:
+            print(f"❌ Erreur lors du nettoyage: {e}")
+            await asyncio.sleep(60)  # Attendre 1 minute avant de réessayer
 
 # Création de l'application FastAPI
 app = FastAPI(
