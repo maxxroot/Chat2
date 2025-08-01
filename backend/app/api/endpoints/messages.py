@@ -116,8 +116,9 @@ async def create_message(
         }
     )
     
-    # Émettre l'événement SSE
+    # Émettre l'événement SSE et Long Polling
     await emit_message_created(new_message)
+    await emit_message_created_lp(new_message)
     
     # TODO: Si la fédération est activée et que le serveur/canal est fédéré,
     # créer et envoyer l'activité ActivityPub
