@@ -130,7 +130,12 @@ class AuthManager:
             raise credentials_exception
         
         # Vérifier que la session n'a pas expiré
-        if session["expires_at"] < datetime.now(timezone.utc):
+        session_expires = session["expires_at"]
+        # S'assurer que session_expires a un timezone
+        if session_expires.tzinfo is None:
+            session_expires = session_expires.replace(tzinfo=timezone.utc)
+        
+        if session_expires < datetime.now(timezone.utc):
             await db.sessions.delete_one({"_id": session_id})
             raise credentials_exception
         
