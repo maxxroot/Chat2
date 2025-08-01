@@ -356,8 +356,9 @@ async def delete_message(
     # Supprimer le message
     await db.messages.delete_one({"_id": message_id})
     
-    # Émettre l'événement SSE
+    # Émettre l'événement SSE et Long Polling
     await emit_message_deleted(message["channel_id"], message_id)
+    await emit_message_deleted_lp(message["channel_id"], message_id, message.get("server_id"))
     
     return {"message": "Message supprimé avec succès"}
 
