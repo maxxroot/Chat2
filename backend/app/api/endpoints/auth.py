@@ -16,11 +16,6 @@ from ..dependencies import get_db
 
 router = APIRouter()
 
-async def get_db():
-    """Dépendance pour récupérer la base de données"""
-    from ...server import app
-    return app.state.db
-
 @router.post("/register", response_model=UserWithToken)
 async def register(user_data: UserCreate, request: Request, db: Database = Depends(get_db)):
     """Créer un nouveau compte utilisateur"""
