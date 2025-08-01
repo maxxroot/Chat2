@@ -13,6 +13,7 @@ from ...core.database import Database
 from ...models.server import ServerCreate, ServerUpdate, ServerResponse, ServerInviteCreate, ServerInviteResponse
 from ...models.channel import ChannelCreate, ChannelType
 from ...sse.events import emit_server_member_joined, emit_server_member_left
+from ...longpolling.manager import emit_server_member_joined_lp, emit_server_member_left_lp
 from ...utils.validation import validate_server_name
 from ..dependencies import get_db
 
