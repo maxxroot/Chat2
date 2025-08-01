@@ -298,8 +298,9 @@ async def update_message(
     # Récupérer le message mis à jour
     updated_message = await db.messages.find_one({"_id": message_id})
     
-    # Émettre l'événement SSE
+    # Émettre l'événement SSE et Long Polling
     await emit_message_updated(updated_message)
+    await emit_message_updated_lp(updated_message)
     
     return MessageResponse(
         id=updated_message["_id"],
