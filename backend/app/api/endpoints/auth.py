@@ -2,9 +2,9 @@
 Endpoints d'authentification
 """
 
+from fastapi import APIRouter, HTTPException, status, Depends, Request
 from datetime import datetime, timezone
 from typing import Dict, Any
-from fastapi import APIRouter, HTTPException, status, Depends, Request
 from nanoid import generate
 
 from ...core.database import Database
