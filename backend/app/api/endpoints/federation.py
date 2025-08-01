@@ -16,7 +16,7 @@ router = APIRouter()
 
 async def get_federation_manager() -> FederationManager:
     """Dépendance pour récupérer le gestionnaire de fédération"""
-    from ...server import app
+    from ....server import app
     return app.state.federation
 
 @router.get("/users/{username}")
