@@ -17,7 +17,7 @@ from ..dependencies import get_db
 router = APIRouter()
 
 @router.post("/register", response_model=UserWithToken)
-async def register(user_data: UserCreate, request: Request, db = Depends(get_db)):
+async def register(user_data: UserCreate, request: Request, db: Database = Depends(get_db)):
     """Créer un nouveau compte utilisateur"""
     
     # Valider le nom d'utilisateur
