@@ -151,11 +151,11 @@ class AuthManager:
 auth_manager = AuthManager()
 
 # Dépendance pour récupérer l'utilisateur actuel
-async def get_current_user(db: Database, credentials: HTTPAuthorizationCredentials = Depends(security)) -> Dict[str, Any]:
+async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security), db: Database = Depends(get_db)) -> Dict[str, Any]:
     return await auth_manager.get_current_user(db, credentials)
 
 # Dépendance pour récupérer l'utilisateur actuel (optionnel)
-async def get_current_user_optional(db: Database, credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)) -> Optional[Dict[str, Any]]:
+async def get_current_user_optional(credentials: Optional[HTTPAuthorizationCredentials] = Depends(security), db: Database = Depends(get_db)) -> Optional[Dict[str, Any]]:
     if credentials is None:
         return None
     
