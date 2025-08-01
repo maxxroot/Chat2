@@ -7,7 +7,6 @@ from fastapi import APIRouter, HTTPException, status, Depends, Query
 from datetime import datetime, timezone
 from nanoid import generate
 
-from ...core.database import Database
 from ...core.auth import get_current_user
 from ...core.config import settings
 from ...models.message import MessageCreate, MessageUpdate, MessageResponse, MessageType, MessageSearchQuery
@@ -26,7 +25,7 @@ async def create_message(
     channel_id: str,
     message_data: MessageCreate,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db)
+    db = Depends(get_db)
 ):
     """Créer un nouveau message dans un canal"""
     
@@ -144,7 +143,7 @@ async def create_message(
 async def get_messages(
     channel_id: str,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db),
+    db = Depends(get_db),
     limit: int = Query(default=50, le=100, ge=1),
     before: Optional[str] = Query(default=None)
 ):
@@ -203,7 +202,7 @@ async def get_messages(
 async def get_message(
     message_id: str,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db)
+    db = Depends(get_db)
 ):
     """Récupérer un message spécifique"""
     
@@ -261,7 +260,7 @@ async def update_message(
     message_id: str,
     update_data: MessageUpdate,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db)
+    db = Depends(get_db)
 ):
     """Modifier un message"""
     
@@ -324,7 +323,7 @@ async def update_message(
 async def delete_message(
     message_id: str,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db)
+    db = Depends(get_db)
 ):
     """Supprimer un message"""
     
@@ -367,7 +366,7 @@ async def add_reaction(
     message_id: str,
     emoji: str,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db)
+    db = Depends(get_db)
 ):
     """Ajouter une réaction à un message"""
     
@@ -407,7 +406,7 @@ async def remove_reaction(
     message_id: str,
     emoji: str,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db)
+    db = Depends(get_db)
 ):
     """Supprimer une réaction d'un message"""
     
@@ -429,7 +428,7 @@ async def remove_reaction(
 async def search_messages(
     search_query: MessageSearchQuery,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db)
+    db = Depends(get_db)
 ):
     """Rechercher des messages"""
     

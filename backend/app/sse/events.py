@@ -148,7 +148,7 @@ async def get_db():
 async def event_stream(
     request: Request,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db)
+    db = Depends(get_db)
 ):
     """Flux d'événements SSE pour l'utilisateur connecté"""
     
@@ -208,7 +208,7 @@ async def channel_event_stream(
     channel_id: str,
     request: Request,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db)
+    db = Depends(get_db)
 ):
     """Flux d'événements SSE pour un canal spécifique"""
     

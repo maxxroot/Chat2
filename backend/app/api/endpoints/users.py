@@ -6,7 +6,6 @@ from typing import List, Optional
 from fastapi import APIRouter, HTTPException, status, Depends
 from datetime import datetime, timezone
 
-from ...core.database import Database
 from ...core.auth import get_current_user
 from ...models.user import UserResponse, UserUpdate
 from ...utils.validation import validate_display_name
@@ -19,7 +18,7 @@ async def get_db():
     return app.state.db
 
 @router.get("/{user_id}", response_model=UserResponse)
-async def get_user(user_id: str, db: Database = Depends(get_db)):
+async def get_user(user_id: str, db = Depends(get_db)):
     """Récupérer un utilisateur par son ID"""
     
     user = await db.get_user_by_id(user_id)
@@ -56,7 +55,7 @@ async def get_user(user_id: str, db: Database = Depends(get_db)):
 async def update_current_user(
     update_data: UserUpdate,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db)
+    db = Depends(get_db)
 ):
     """Mettre à jour les informations de l'utilisateur actuel"""
     
@@ -110,7 +109,7 @@ async def update_current_user(
     )
 
 @router.get("/{username}/profile")
-async def get_user_profile(username: str, db: Database = Depends(get_db)):
+async def get_user_profile(username: str, db = Depends(get_db)):
     """Récupérer le profil public d'un utilisateur"""
     
     user = await db.get_user_by_username(username)
@@ -138,7 +137,7 @@ async def get_user_profile(username: str, db: Database = Depends(get_db)):
 async def send_friend_request(
     user_id: str,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db)
+    db = Depends(get_db)
 ):
     """Envoyer une demande d'ami"""
     
@@ -203,7 +202,7 @@ async def send_friend_request(
 async def accept_friend_request(
     user_id: str,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db)
+    db = Depends(get_db)
 ):
     """Accepter une demande d'ami"""
     
@@ -242,7 +241,7 @@ async def accept_friend_request(
 async def remove_friend_or_reject(
     user_id: str,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db)
+    db = Depends(get_db)
 ):
     """Supprimer un ami ou rejeter une demande"""
     
@@ -263,7 +262,7 @@ async def remove_friend_or_reject(
 async def block_user(
     user_id: str,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db)
+    db = Depends(get_db)
 ):
     """Bloquer un utilisateur"""
     
@@ -297,7 +296,7 @@ async def block_user(
 async def unblock_user(
     user_id: str,
     current_user: dict = Depends(get_current_user),
-    db: Database = Depends(get_db)
+    db = Depends(get_db)
 ):
     """Débloquer un utilisateur"""
     
