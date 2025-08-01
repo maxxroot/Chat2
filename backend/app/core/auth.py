@@ -13,6 +13,7 @@ from nanoid import generate
 
 from .config import settings
 from .database import Database
+from ..api.dependencies import get_db
 
 # Configuration du hashage des mots de passe
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
