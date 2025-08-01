@@ -9,6 +9,7 @@ from nanoid import generate
 
 from ...core.auth import auth_manager, get_current_user
 from ...core.config import settings
+from ...core.database import Database
 from ...models.user import UserCreate, UserLogin, UserWithToken, UserResponse
 from ...utils.validation import validate_username
 from ..dependencies import get_db
