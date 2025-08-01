@@ -169,7 +169,7 @@ async def login(login_data: UserLogin, request: Request, db = Depends(get_db)):
     )
 
 @router.post("/logout")
-async def logout(current_user: Dict[str, Any] = Depends(get_current_user), db = Depends(get_db)):
+async def logout(current_user: Dict[str, Any] = Depends(get_current_user), db: Database = Depends(get_db)):
     """Se déconnecter (révoquer la session actuelle)"""
     
     # Récupérer l'ID de session depuis le token (à implémenter)
