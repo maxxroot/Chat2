@@ -1,0 +1,280 @@
+/* Styles globaux pour Revolt Fédéré */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  height: 100vh;
+}
+
+/* Scrollbar custom */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Animation pour les messages */
+.message-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.message-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 200ms, transform 200ms;
+}
+
+/* Style pour les mentions */
+.mention {
+  background-color: rgba(88, 101, 242, 0.1);
+  color: #5865f2;
+  padding: 0 2px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+/* Style pour les canaux actifs */
+.channel-active {
+  background-color: rgba(79, 84, 92, 0.16);
+  color: #ffffff;
+}
+
+/* Style pour les indicateurs en ligne */
+.online-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: #23a55a;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.offline-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: #80848e;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+/* Style pour les badges */
+.badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-developer {
+  background-color: #5865f2;
+  color: white;
+}
+
+.badge-founder {
+  background-color: #f23f42;
+  color: white;
+}
+
+.badge-supporter {
+  background-color: #f1c40f;
+  color: black;
+}
+
+/* Style pour les réactions */
+.reaction {
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(79, 84, 92, 0.16);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 2px 6px;
+  margin: 2px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.reaction:hover {
+  background-color: rgba(79, 84, 92, 0.24);
+}
+
+.reaction.reacted {
+  background-color: rgba(88, 101, 242, 0.15);
+  border-color: #5865f2;
+  color: #5865f2;
+}
+
+/* Style pour les embeds */
+.embed {
+  background-color: #2f3136;
+  border-left: 4px solid #202225;
+  border-radius: 0 4px 4px 0;
+  padding: 8px 12px;
+  margin: 8px 0;
+  max-width: 520px;
+}
+
+.embed-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.embed-description {
+  color: #dcddde;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Style pour les pièces jointes */
+.attachment {
+  background-color: #36393f;
+  border: 1px solid #202225;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 8px 0;
+  max-width: 400px;
+}
+
+.attachment-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Style pour l'indicateur de frappe */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  color: #72767d;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.typing-dots {
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.typing-dots span {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: #72767d;
+  margin-right: 2px;
+  animation: typing 1.4s infinite;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  30% {
+    transform: translateY(-10px);
+    opacity: 0.7;
+  }
+}
+
+/* Style responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 240px;
+  }
+  
+  .chat-input {
+    padding: 12px;
+  }
+  
+  .message-content {
+    font-size: 15px;
+  }
+}
+
+/* Style pour les modales */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #36393f;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Animations d'entrée */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
