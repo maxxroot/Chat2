@@ -9,6 +9,7 @@ from nanoid import generate
 
 from ...core.database import Database
 from ...core.auth import get_current_user
+from ...core.config import settings
 from ...models.server import ServerCreate, ServerUpdate, ServerResponse, ServerInviteCreate, ServerInviteResponse
 from ...models.channel import ChannelCreate, ChannelType
 from ...sse.events import emit_server_member_joined, emit_server_member_left
