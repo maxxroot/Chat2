@@ -16,6 +16,7 @@ from app.core.config import settings
 from app.core.database import Database
 from app.core.federation import FederationManager
 from app.api.routes import api_router
+from app.api.endpoints.federation import set_federation_manager
 from app.sse import sse_router
 from app.longpolling import longpolling_router, long_polling_manager
 from app.utils.startup import setup_default_data
