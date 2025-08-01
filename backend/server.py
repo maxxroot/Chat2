@@ -39,6 +39,9 @@ async def lifespan(app: FastAPI):
         description=settings.INSTANCE_DESCRIPTION
     )
     
+    # Initialiser la référence globale pour les endpoints
+    set_federation_manager(app.state.federation)
+    
     # Configuration initiale de la base de données
     await setup_default_data(app.state.db)
     
