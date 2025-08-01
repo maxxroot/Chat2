@@ -69,6 +69,7 @@ app.add_middleware(
 # Routes principales
 app.include_router(api_router, prefix="/api")
 app.include_router(sse_router, prefix="/events")
+app.include_router(longpolling_router, prefix="/api/poll")
 
 # Servir les fichiers statiques (pour les médias)
 os.makedirs("uploads", exist_ok=True)
