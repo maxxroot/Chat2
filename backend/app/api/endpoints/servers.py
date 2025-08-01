@@ -369,8 +369,9 @@ async def leave_server(
         "_id": f"{server_id}:{current_user['_id']}"
     })
     
-    # Émettre un événement
+    # Émettre un événement SSE et Long Polling
     await emit_server_member_left(server_id, current_user["_id"])
+    await emit_server_member_left_lp(server_id, current_user["_id"])
     
     return {"message": "Vous avez quitté le serveur"}
 
