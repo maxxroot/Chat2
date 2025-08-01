@@ -7,6 +7,7 @@ from fastapi import APIRouter, HTTPException, status, Depends, Request
 from fastapi.responses import JSONResponse
 
 from ...core.auth import get_current_user_optional
+from ...core.database import Database
 from ...core.federation import FederationManager
 from ...core.config import settings
 from ..dependencies import get_db
@@ -21,7 +22,7 @@ async def get_federation_manager() -> FederationManager:
 @router.get("/users/{username}")
 async def get_user_actor(
     username: str,
-    db = Depends(get_db),
+    db: Database = Depends(get_db),
     federation: FederationManager = Depends(get_federation_manager)
 ):
     """Récupérer l'acteur ActivityPub d'un utilisateur local"""
@@ -53,7 +54,7 @@ async def get_user_actor(
 @router.get("/servers/{server_id}")
 async def get_server_actor(
     server_id: str,
-    db = Depends(get_db),
+    db: Database = Depends(get_db),
     federation: FederationManager = Depends(get_federation_manager)
 ):
     """Récupérer l'acteur ActivityPub d'un serveur local (Group)"""
@@ -86,7 +87,7 @@ async def get_server_actor(
 @router.get("/messages/{message_id}")
 async def get_message_note(
     message_id: str,
-    db = Depends(get_db),
+    db: Database = Depends(get_db),
     federation: FederationManager = Depends(get_federation_manager)
 ):
     """Récupérer une Note ActivityPub pour un message"""
@@ -143,7 +144,7 @@ async def get_message_note(
 async def user_inbox(
     username: str,
     request: Request,
-    db = Depends(get_db),
+    db: Database = Depends(get_db),
     federation: FederationManager = Depends(get_federation_manager)
 ):
     """Boîte de réception ActivityPub d'un utilisateur"""
@@ -185,7 +186,7 @@ async def user_inbox(
 async def server_inbox(
     server_id: str,
     request: Request,
-    db = Depends(get_db),
+    db: Database = Depends(get_db),
     federation: FederationManager = Depends(get_federation_manager)
 ):
     """Boîte de réception ActivityPub d'un serveur"""
@@ -226,7 +227,7 @@ async def server_inbox(
 @router.post("/inbox")
 async def shared_inbox(
     request: Request,
-    db = Depends(get_db),
+    db: Database = Depends(get_db),
     federation: FederationManager = Depends(get_federation_manager)
 ):
     """Boîte de réception partagée de l'instance"""
@@ -262,7 +263,7 @@ async def shared_inbox(
 @router.get("/users/{username}/outbox")
 async def user_outbox(
     username: str,
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Boîte d'envoi ActivityPub d'un utilisateur"""
     
@@ -294,7 +295,7 @@ async def user_outbox(
 @router.get("/users/{username}/followers")
 async def user_followers(
     username: str,
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Liste des abonnés ActivityPub d'un utilisateur"""
     
@@ -325,7 +326,7 @@ async def user_followers(
 @router.get("/users/{username}/following")
 async def user_following(
     username: str,
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Liste des abonnements ActivityPub d'un utilisateur"""
     
@@ -355,7 +356,7 @@ async def user_following(
 
 @router.get("/instances")
 async def get_known_instances(
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Récupérer la liste des instances fédérées connues"""
     
@@ -369,7 +370,7 @@ async def get_known_instances(
 @router.post("/discover")
 async def discover_instance(
     domain: str,
-    db = Depends(get_db),
+    db: Database = Depends(get_db),
     federation: FederationManager = Depends(get_federation_manager)
 ):
     """Découvrir une nouvelle instance fédérée"""
