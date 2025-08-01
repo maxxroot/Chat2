@@ -105,7 +105,7 @@ async def register(user_data: UserCreate, request: Request, db: Database = Depen
     )
 
 @router.post("/login", response_model=UserWithToken)
-async def login(login_data: UserLogin, request: Request, db = Depends(get_db)):
+async def login(login_data: UserLogin, request: Request, db: Database = Depends(get_db)):
     """Se connecter avec username/email et mot de passe"""
     
     # Trouver l'utilisateur (par username ou email)
