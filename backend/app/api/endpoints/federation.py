@@ -14,10 +14,22 @@ from ..dependencies import get_db
 
 router = APIRouter()
 
+# Instance globale du gestionnaire de fédération (sera initialisée au démarrage)
+_federation_manager: Optional[FederationManager] = None
+
+def set_federation_manager(federation_manager: FederationManager):
+    """Initialiser le gestionnaire de fédération global"""
+    global _federation_manager
+    _federation_manager = federation_manager
+
 async def get_federation_manager() -> FederationManager:
     """Dépendance pour récupérer le gestionnaire de fédération"""
-    from ....server import app
-    return app.state.federation
+    if _federation_manager is None:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Service de fédération non disponible"
+        )
+    return _federation_manager
 
 @router.get("/users/{username}")
 async def get_user_actor(
