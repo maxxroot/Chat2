@@ -16,7 +16,7 @@ from ...utils.validation import clean_content, extract_mentions
 
 router = APIRouter()
 
-async def get_db() -> Database:
+async def get_db():
     """Dépendance pour récupérer la base de données"""
     from ...server import app
     return app.state.db
