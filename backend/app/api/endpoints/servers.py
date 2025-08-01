@@ -323,8 +323,9 @@ async def join_server(
     
     await db.db.server_members.insert_one(member_data)
     
-    # Émettre un événement
+    # Émettre un événement SSE et Long Polling
     await emit_server_member_joined(server_id, current_user["_id"])
+    await emit_server_member_joined_lp(server_id, current_user["_id"])
     
     return {"message": "Vous avez rejoint le serveur"}
 
