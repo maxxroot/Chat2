@@ -12,6 +12,7 @@ from ...core.config import settings
 from ...core.database import Database
 from ...models.message import MessageCreate, MessageUpdate, MessageResponse, MessageType, MessageSearchQuery
 from ...sse.events import emit_message_created, emit_message_updated, emit_message_deleted
+from ...longpolling.manager import emit_message_created_lp, emit_message_updated_lp, emit_message_deleted_lp
 from ...utils.validation import clean_content, extract_mentions
 from ..dependencies import get_db
 
