@@ -10,13 +10,9 @@ from nanoid import generate
 from ...core.auth import get_current_user
 from ...models.channel import ChannelCreate, ChannelUpdate, ChannelResponse, ChannelType
 from ...utils.validation import validate_channel_name
+from ..dependencies import get_db
 
 router = APIRouter()
-
-async def get_db():
-    """Dépendance pour récupérer la base de données"""
-    from ...server import app
-    return app.state.db
 
 @router.post("", response_model=ChannelResponse)
 async def create_channel(

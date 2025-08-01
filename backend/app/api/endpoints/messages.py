@@ -12,13 +12,9 @@ from ...core.config import settings
 from ...models.message import MessageCreate, MessageUpdate, MessageResponse, MessageType, MessageSearchQuery
 from ...sse.events import emit_message_created, emit_message_updated, emit_message_deleted
 from ...utils.validation import clean_content, extract_mentions
+from ..dependencies import get_db
 
 router = APIRouter()
-
-async def get_db():
-    """Dépendance pour récupérer la base de données"""
-    from ...server import app
-    return app.state.db
 
 @router.post("/{channel_id}", response_model=MessageResponse)
 async def create_message(

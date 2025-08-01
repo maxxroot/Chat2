@@ -13,13 +13,9 @@ from ...models.server import ServerCreate, ServerUpdate, ServerResponse, ServerI
 from ...models.channel import ChannelCreate, ChannelType
 from ...sse.events import emit_server_member_joined, emit_server_member_left
 from ...utils.validation import validate_server_name
+from ..dependencies import get_db
 
 router = APIRouter()
-
-async def get_db():
-    """Dépendance pour récupérer la base de données"""
-    from ...server import app
-    return app.state.db
 
 @router.post("", response_model=ServerResponse)
 async def create_server(

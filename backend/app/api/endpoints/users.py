@@ -9,13 +9,9 @@ from datetime import datetime, timezone
 from ...core.auth import get_current_user
 from ...models.user import UserResponse, UserUpdate
 from ...utils.validation import validate_display_name
+from ..dependencies import get_db
 
 router = APIRouter()
-
-async def get_db():
-    """Dépendance pour récupérer la base de données"""
-    from ...server import app
-    return app.state.db
 
 @router.get("/{user_id}", response_model=UserResponse)
 async def get_user(user_id: str, db = Depends(get_db)):

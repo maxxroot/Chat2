@@ -9,13 +9,9 @@ from fastapi.responses import JSONResponse
 from ...core.auth import get_current_user_optional
 from ...core.federation import FederationManager
 from ...core.config import settings
+from ..dependencies import get_db
 
 router = APIRouter()
-
-async def get_db():
-    """Dépendance pour récupérer la base de données"""
-    from ...server import app
-    return app.state.db
 
 async def get_federation_manager() -> FederationManager:
     """Dépendance pour récupérer le gestionnaire de fédération"""

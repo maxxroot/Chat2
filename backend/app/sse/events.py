@@ -139,11 +139,6 @@ class SSEManager:
 # Instance globale du gestionnaire SSE
 sse_manager = SSEManager()
 
-async def get_db():
-    """Dépendance pour récupérer la base de données"""
-    from ..server import app
-    return app.state.db
-
 @router.get("/stream")
 async def event_stream(
     request: Request,
