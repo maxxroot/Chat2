@@ -199,7 +199,7 @@ async def get_current_user_info(current_user: Dict[str, Any] = Depends(get_curre
     )
 
 @router.delete("/me")
-async def delete_account(current_user: Dict[str, Any] = Depends(get_current_user), db = Depends(get_db)):
+async def delete_account(current_user: Dict[str, Any] = Depends(get_current_user), db: Database = Depends(get_db)):
     """Supprimer son compte"""
     
     # Marquer l'utilisateur comme supprimé au lieu de le supprimer complètement
