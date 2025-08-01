@@ -12,6 +12,7 @@ from collections import defaultdict
 
 from ..core.auth import get_current_user
 from ..core.database import Database
+from ..api.dependencies import get_db
 
 router = APIRouter()
 
