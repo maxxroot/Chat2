@@ -17,6 +17,7 @@ from app.core.database import Database
 from app.core.federation import FederationManager
 from app.api.routes import api_router
 from app.sse import sse_router
+from app.longpolling import longpolling_router
 from app.utils.startup import setup_default_data
 
 # Gestionnaire de cycle de vie
