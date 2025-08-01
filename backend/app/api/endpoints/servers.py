@@ -9,6 +9,7 @@ from nanoid import generate
 
 from ...core.auth import get_current_user
 from ...core.config import settings
+from ...core.database import Database
 from ...models.server import ServerCreate, ServerUpdate, ServerResponse, ServerInviteCreate, ServerInviteResponse
 from ...models.channel import ChannelCreate, ChannelType
 from ...sse.events import emit_server_member_joined, emit_server_member_left
@@ -21,7 +22,7 @@ router = APIRouter()
 async def create_server(
     server_data: ServerCreate,
     current_user: dict = Depends(get_current_user),
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Créer un nouveau serveur"""
     
@@ -106,7 +107,7 @@ async def create_server(
 async def get_server(
     server_id: str,
     current_user: dict = Depends(get_current_user),
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Récupérer un serveur par son ID"""
     
@@ -153,7 +154,7 @@ async def update_server(
     server_id: str,
     update_data: ServerUpdate,
     current_user: dict = Depends(get_current_user),
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Mettre à jour un serveur"""
     
@@ -241,7 +242,7 @@ async def update_server(
 async def delete_server(
     server_id: str,
     current_user: dict = Depends(get_current_user),
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Supprimer un serveur"""
     
@@ -277,7 +278,7 @@ async def delete_server(
 async def join_server(
     server_id: str,
     current_user: dict = Depends(get_current_user),
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Rejoindre un serveur public"""
     
@@ -330,7 +331,7 @@ async def join_server(
 async def leave_server(
     server_id: str,
     current_user: dict = Depends(get_current_user),
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Quitter un serveur"""
     
@@ -376,7 +377,7 @@ async def create_invite(
     server_id: str,
     invite_data: ServerInviteCreate,
     current_user: dict = Depends(get_current_user),
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Créer une invitation pour un serveur"""
     
@@ -438,7 +439,7 @@ async def create_invite(
 @router.get("/")
 async def get_user_servers(
     current_user: dict = Depends(get_current_user),
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Récupérer tous les serveurs de l'utilisateur"""
     

@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from nanoid import generate
 
 from ...core.auth import get_current_user
+from ...core.database import Database
 from ...models.channel import ChannelCreate, ChannelUpdate, ChannelResponse, ChannelType
 from ...utils.validation import validate_channel_name
 from ..dependencies import get_db
@@ -18,7 +19,7 @@ router = APIRouter()
 async def create_channel(
     channel_data: ChannelCreate,
     current_user: dict = Depends(get_current_user),
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Créer un nouveau canal"""
     
@@ -82,7 +83,7 @@ async def create_channel(
 async def get_channel(
     channel_id: str,
     current_user: dict = Depends(get_current_user),
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Récupérer un canal par son ID"""
     
@@ -136,7 +137,7 @@ async def update_channel(
     channel_id: str,
     update_data: ChannelUpdate,
     current_user: dict = Depends(get_current_user),
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Mettre à jour un canal"""
     
@@ -220,7 +221,7 @@ async def update_channel(
 async def delete_channel(
     channel_id: str,
     current_user: dict = Depends(get_current_user),
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Supprimer un canal"""
     
@@ -267,7 +268,7 @@ async def delete_channel(
 @router.get("/")
 async def get_user_channels(
     current_user: dict = Depends(get_current_user),
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Récupérer tous les canaux accessibles à l'utilisateur"""
     
@@ -314,7 +315,7 @@ async def get_user_channels(
 async def start_typing(
     channel_id: str,
     current_user: dict = Depends(get_current_user),
-    db = Depends(get_db)
+    db: Database = Depends(get_db)
 ):
     """Indiquer que l'utilisateur tape dans un canal"""
     
